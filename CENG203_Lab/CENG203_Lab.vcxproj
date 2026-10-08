@@ -124,6 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Labs\Week03.cpp" />
+    <ClCompile Include="LinkedList\LinkedList.cpp" />
+    <ClCompile Include="LinkedList\CircularList.cpp" />
+    <ClCompile Include="LinkedList\DoublyLinkedList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Labs\Labs.h" />
+    <ClInclude Include="LinkedList\Node.h" />
+    <ClInclude Include="LinkedList\LinkedList.h" />
+    <ClInclude Include="LinkedList\CircularList.h" />
+    <ClInclude Include="LinkedList\DNode.h" />
+    <ClInclude Include="LinkedList\DoublyLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

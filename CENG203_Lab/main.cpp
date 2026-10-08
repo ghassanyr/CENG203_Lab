@@ -1,13 +1,24 @@
-// CENG203_Lab.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
 #include "Labs/Labs.h"
+#include <iostream>
 using namespace std;
 
 int main()
 {
-	cout << "3. Week - Linked Lists" << endl;
-	runWeek03();
-	return 0;
+    int choice = -1;
+    while (choice != 0)
+    {
+        cout << endl << "--- CENG203 Lab ---" << endl;
+        cout << " 3. Week 3 - Linked lists" << endl;
+        cout << " 0. Exit" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 3:  runWeek03(); break;
+        case 0:  break;
+        default: cout << "Invalid choice" << endl;
+        }
+    }
+    return 0;
 }
