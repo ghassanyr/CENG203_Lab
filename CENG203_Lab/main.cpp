@@ -9,6 +9,7 @@ int main()
     {
         cout << endl << "--- CENG203 Lab ---" << endl;
         cout << " 3. Week 3 - Linked lists" << endl;
+        cout << " 5. Week 5 - Recursion" << endl;
         cout << " 0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -16,6 +17,7 @@ int main()
         switch (choice)
         {
         case 3:  runWeek03(); break;
+        case 5:  runWeek05(); break;
         case 0:  break;
         default: cout << "Invalid choice" << endl;
         }
