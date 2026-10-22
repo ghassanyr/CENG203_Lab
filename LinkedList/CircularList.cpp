@@ -11,15 +11,13 @@ CircularList::~CircularList()
 {
     if (head == nullptr)
         return;
-
     Node* cur = head->next;
-    while (cur != head)
-    {
-        Node* victim = cur;
+    while (cur != head) {               // delete every node except head
+        Node* temp = cur;
         cur = cur->next;
-        delete victim;
+        delete temp;
     }
-    delete head;
+    delete head;                        // ring is broken: delete the last
     head = nullptr;
 }
 
@@ -28,36 +26,29 @@ void CircularList::append(int value)
     Node* newNode = new Node;
     newNode->data = value;
 
-    if (head == nullptr)
-    {
-        newNode->next = newNode;
+    if (head == nullptr) {              // first node points to itself
         head = newNode;
+        newNode->next = head;
         return;
     }
-
-    Node* last = head;
-    while (last->next != head)
-        last = last->next;
-
-    newNode->next = head;
-    last->next = newNode;
+    Node* cur = head;
+    while (cur->next != head)           // last node: its next is head
+        cur = cur->next;
+    cur->next = newNode;
+    newNode->next = head;               // close the ring again
 }
 
 void CircularList::display() const
 {
-    if (head == nullptr)
-    {
-        cout << "(empty)" << endl;
+    if (head == nullptr) {
+        cout << "(empty ring)" << endl;
         return;
     }
-
     Node* cur = head;
-    do
-    {
+    do {                                // do-while: head is printed first
         cout << cur->data << " -> ";
         cur = cur->next;
-    } while (cur != head);
-
+    } while (cur != head);              // stop when we are back at head
     cout << "(back to " << head->data << ")" << endl;
 }
 
@@ -65,14 +56,11 @@ int CircularList::length() const
 {
     if (head == nullptr)
         return 0;
-
     int count = 0;
     Node* cur = head;
-    do
-    {
+    do {
         count++;
         cur = cur->next;
     } while (cur != head);
-
     return count;
 }

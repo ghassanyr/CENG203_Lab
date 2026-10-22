@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 
+// =============================== Week 2 ===============================
 LinkedList::LinkedList()
 {
     head = nullptr;
@@ -9,11 +10,10 @@ LinkedList::LinkedList()
 
 LinkedList::~LinkedList()
 {
-    while (head != nullptr)
-    {
-        Node* victim = head;
+    while (head != nullptr) {           // delete the nodes one by one
+        Node* temp = head;
         head = head->next;
-        delete victim;
+        delete temp;
     }
 }
 
@@ -38,21 +38,18 @@ bool LinkedList::isEmpty() const
 }
 
 // =============================== Week 3 ===============================
-
 void LinkedList::insertAtEnd(int value)                     // Q2
 {
     Node* newNode = new Node;
     newNode->data = value;
     newNode->next = nullptr;
 
-    if (head == nullptr)
-    {
+    if (head == nullptr) {              // empty list: new node is the head
         head = newNode;
         return;
     }
-
     Node* cur = head;
-    while (cur->next != nullptr)
+    while (cur->next != nullptr)        // walk to the LAST node
         cur = cur->next;
     cur->next = newNode;
 }
@@ -74,24 +71,21 @@ void LinkedList::createFromArray(const int arr[], int n)    // Q2
 int LinkedList::search(int value) const                     // Q3
 {
     int index = 0;
-    for (Node* cur = head; cur != nullptr; cur = cur->next)
-    {
+    for (Node* cur = head; cur != nullptr; cur = cur->next) {
         if (cur->data == value)
-            return index;
+            return index;               // found: stop at the FIRST match
         index++;
     }
-    return -1;
+    return -1;                          // visited every node, no match
 }
 
 int LinkedList::update(int oldValue, int newValue)          // Q4
 {
     int changed = 0;
-    for (Node* cur = head; cur != nullptr; cur = cur->next)
-    {
-        if (cur->data == oldValue)
-        {
+    for (Node* cur = head; cur != nullptr; cur = cur->next) {
+        if (cur->data == oldValue) {
             cur->data = newValue;
-            changed++;
+            changed++;                  // no break: continue to the end
         }
     }
     return changed;
@@ -100,71 +94,61 @@ int LinkedList::update(int oldValue, int newValue)          // Q4
 bool LinkedList::insertAt(int index, int value)             // Q5
 {
     if (index < 0 || index > length())
-        return false;
+        return false;                   // list unchanged
+    if (index == 0) {
+        insertAtFront(value);
+        return true;
+    }
+    Node* prev = head;
+    for (int i = 0; i < index - 1; i++) // stop at the node BEFORE the index
+        prev = prev->next;
 
     Node* newNode = new Node;
     newNode->data = value;
-
-    if (index == 0)
-    {
-        newNode->next = head;
-        head = newNode;
-        return true;
-    }
-
-    Node* prev = head;
-    for (int i = 0; i < index - 1; i++)
-        prev = prev->next;
-
-    newNode->next = prev->next;
-    prev->next = newNode;
+    newNode->next = prev->next;         // 1) new node points to the rest
+    prev->next = newNode;               // 2) predecessor points to new node
     return true;
 }
 
 bool LinkedList::deleteValue(int value)                     // Q6
 {
-    if (head == nullptr)
+    if (head == nullptr)                // case 1: empty list
         return false;
 
-    if (head->data == value)
-    {
-        Node* victim = head;
+    if (head->data == value) {          // case 2: the head node
+        Node* temp = head;
         head = head->next;
-        delete victim;
+        delete temp;
         return true;
     }
 
-    Node* prev = head;
+    Node* prev = head;                  // case 3: middle or last node
     while (prev->next != nullptr && prev->next->data != value)
         prev = prev->next;
 
-    if (prev->next == nullptr)
+    if (prev->next == nullptr)          // case 4: not found
         return false;
 
-    Node* victim = prev->next;
-    prev->next = victim->next;
-    delete victim;
+    Node* temp = prev->next;
+    prev->next = temp->next;            // unlink ...
+    delete temp;                        // ... then free the memory
     return true;
 }
 
 void LinkedList::merge(LinkedList& other)                   // Q7
 {
-    if (other.head == nullptr)
+    if (other.head == nullptr)          // nothing to move
         return;
-
-    if (head == nullptr)
-    {
+    if (head == nullptr) {
         head = other.head;
     }
-    else
-    {
+    else {
         Node* cur = head;
-        while (cur->next != nullptr)
+        while (cur->next != nullptr)    // walk to the last node of THIS
             cur = cur->next;
         cur->next = other.head;
     }
-
-    other.head = nullptr;
+    other.head = nullptr;               // other gives up its nodes
 }
 
 // =============================== Week 5 ===============================
@@ -176,10 +160,10 @@ void LinkedList::displayBackward() const
 
 void LinkedList::printBackward(const Node* node)
 {
-    if (node == nullptr)
+    if (node == nullptr)            // base case: past the last node
         return;
-    printBackward(node->next);
-    cout << node->data << " ";
+    printBackward(node->next);      // first go to the end ...
+    cout << node->data << " ";      // ... print on the way back
 }
 
 void LinkedList::reverse()
@@ -190,9 +174,9 @@ void LinkedList::reverse()
 Node* LinkedList::reverseFrom(Node* node)
 {
     if (node == nullptr || node->next == nullptr)
-        return node;
-    Node* newHead = reverseFrom(node->next);
-    node->next->next = node;
-    node->next = nullptr;
+        return node;                // base case: last node = new head
+    Node* newHead = reverseFrom(node->next);    // reverse the rest
+    node->next->next = node;        // the next node now points back
+    node->next = nullptr;           // old link removed (no cycle)
     return newHead;
 }

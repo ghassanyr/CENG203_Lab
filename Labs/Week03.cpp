@@ -1,8 +1,8 @@
 #include "Labs.h"
 #include "../LinkedList/Node.h"
 #include "../LinkedList/LinkedList.h"
-#include "../LinkedList/CircularList.h"
-#include "../LinkedList/DoublyLinkedList.h"
+#include "../LinkedList/CircularList.h"        // Q8 (add when you reach Q8)
+#include "../LinkedList/DoublyLinkedList.h"    // Q9 (add when you reach Q9)
 #include <iostream>
 using namespace std;
 
@@ -13,17 +13,17 @@ void runWeek03()
     // ---------- Q1: three nodes by hand, no class ----------
     Node* n1 = nullptr;
     cout << "[Q1] n1 = " << n1 << "  sizeof(n1) = " << sizeof(n1)
-         << "  sizeof(Node) = " << sizeof(Node) << endl;
+        << "  sizeof(Node) = " << sizeof(Node) << endl;
     n1 = new Node;
     cout << "[Q1] after new: data = " << n1->data
-         << "  next = " << n1->next << endl;
+        << "  next = " << n1->next << endl;
     Node* n2 = new Node;
     Node* n3 = new Node;
     n1->data = 5;   n2->data = 7;   n3->data = 11;
     n1->next = n2;  n2->next = n3;  n3->next = nullptr;
     for (Node* cur = n1; cur != nullptr; cur = cur->next)
         cout << "[Q1] " << cur << "  data = " << cur->data
-             << "  next = " << cur->next << endl;
+        << "  next = " << cur->next << endl;
     delete n3;  delete n2;  delete n1;
 
     // ---------- Q2: insertAtEnd, length, createFromArray ----------
@@ -35,12 +35,12 @@ void runWeek03()
 
     // ---------- Q3: search ----------
     cout << "[Q3] search(4) = " << list.search(4)
-         << "   search(9) = " << list.search(9) << endl;
+        << "   search(9) = " << list.search(9) << endl;
 
     // ---------- Q4: update ----------
     list.insertAtEnd(2);                                   // 7 2 5 4 2
     cout << "[Q4] update(2, 9) changed " << list.update(2, 9)
-         << " node(s): ";  list.display();
+        << " node(s): ";  list.display();
 
     // ---------- Q5: insertAt ----------
     list.insertAt(0, 1);
