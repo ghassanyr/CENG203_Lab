@@ -152,6 +152,10 @@
     <ClCompile Include="Stack\ArrayStack.cpp" />
     <ClCompile Include="Queue\Queue.cpp" />
     <ClCompile Include="Queue\CircularQueue.cpp" />
+    <ClCompile Include="Labs\Week06.cpp" />
+    <ClCompile Include="Tree\TreeUtils.cpp" />
+    <ClCompile Include="Tree\BST.cpp" />
+    <ClCompile Include="Tree\ExpressionTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Labs\Labs.h" />
@@ -165,6 +169,10 @@
     <ClInclude Include="Stack\ArrayStack.h" />
     <ClInclude Include="Queue\Queue.h" />
     <ClInclude Include="Queue\CircularQueue.h" />
+    <ClInclude Include="Tree\TreeNode.h" />
+    <ClInclude Include="Tree\TreeUtils.h" />
+    <ClInclude Include="Tree\BST.h" />
+    <ClInclude Include="Tree\ExpressionTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
